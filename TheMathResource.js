@@ -38,9 +38,8 @@ var tick = (elapsedTime, multiplier) => {
     let dt = BigNumber.from(elapsedTime * multiplier);
     let bonus = theory.publicationMultiplier;
     currency.value += dt * currency2.value * bonus * getA1(a1.level)
+    currnecy2.value += dt
 }
-
-var getTau = () => currency.value;
 
 var getPrimaryEquation = () => {
     let result = "\\dot{n} = A_1\\sqrt{A_3}";
@@ -49,6 +48,11 @@ var getPrimaryEquation = () => {
 
     return result;
 }
+
+var getSecondaryEquation = () => theory.latexSymbol + "=\\max\\rho";
+var getPublicationMultiplier = (tau) => tau.pow(0.164) / BigNumber.THREE;
+var getPublicationMultiplierFormula = (symbol) => "\\frac{{" + symbol + "}^{0.164}}{3}";
+var getTau = () => currency.value;
 
 var getA1 = (level) => BigNumber.from(level)
 
