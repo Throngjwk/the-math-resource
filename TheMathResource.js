@@ -41,6 +41,8 @@ var init = () => {
     achievement2 = theory.createAchievement(1, "Trough", "Reach 5 A1 Level.", () => a1.level > 4);
     achievement3 = theory.createAchievement(2, "Im Thousands", "Make n(t) => 1,000", () => currency.value > 1e3);
     achievement4 = theory.createAchievement(3, "Nice", "Make n(t) => 69,420", () => currency.value > 69420);
+    achievement5 = theory.createAchievement(4, "A2 Mulit?", "Reach 1 A2 Level.", () => a2.level > 0);
+    achievement6 = theory.createAchievement(5, "Im Millions", "Make n(t) => 1,000,000", () => currency.value > 1e6);
 
     updateAvailability();
 }
