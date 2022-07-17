@@ -21,7 +21,9 @@ var init = () => {
 var getTau = () => currency.value;
 
 var getPrimaryEquation = () => {
-    let result = "A_1\\sqrt{A_3} \\times t";
+    let result = "A_1\\sqrt{A_3}";
+
+    result += " \\times t"
 
     return result;
 }
