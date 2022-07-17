@@ -16,6 +16,9 @@ var init = () => {
     currency = theory.createCurrency("n", "n");
     currency2 = theory.createCurrency("t", "t");
 
+    ///////////////////
+    // Regular Upgrades
+
     // a1
     {
         let getDesc = (level) => "A_1=" + getA1(level).toString(0);
