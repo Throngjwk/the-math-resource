@@ -27,6 +27,13 @@ var init = () => {
         a1.getInfo = (amount) => Utils.getMathTo(getDesc(a1.level), getDesc(a1.level + amount));
     }
 
+    /////////////////
+    //// Achievements
+    achievement1 = theory.createAchievement(0, "Im After Played!", "Reach 1 A1 Level.", () => a1.level > 0);
+    achievement2 = theory.createAchievement(1, "Trough", "Reach 5 A1 Level.", () => a1.level > 4);
+    achievement3 = theory.createAchievement(1, "Im Thousands", "Make n(t) => 1,000", () => currency.value > 1e3);
+    achievement4 = theory.createAchievement(1, "Nice", "Make n(t) => 69,420", () => currency.value > 69420);
+
     updateAvailability();
 }
 
