@@ -27,12 +27,20 @@ var init = () => {
         a1.getInfo = (amount) => Utils.getMathTo(getDesc(a1.level), getDesc(a1.level + amount));
     }
 
+    // a2
+    {
+        let getDesc = (level) => "A_2=" + getA2(level).toString(0);
+        a2 = theory.createUpgrade(1, currency, new ExponentialCost(1e5, Math.log2(2.5)));
+        a2.getDescription = (_) => Utils.getMath(getDesc(a2.level));
+        a2.getInfo = (amount) => Utils.getMathTo(getDesc(a2.level), getDesc(a2.level + amount));
+    }
+
     /////////////////
     //// Achievements
     achievement1 = theory.createAchievement(0, "Im After Played!", "Reach 1 A1 Level.", () => a1.level > 0);
     achievement2 = theory.createAchievement(1, "Trough", "Reach 5 A1 Level.", () => a1.level > 4);
-    achievement3 = theory.createAchievement(1, "Im Thousands", "Make n(t) => 1,000", () => currency.value > 1e3);
-    achievement4 = theory.createAchievement(1, "Nice", "Make n(t) => 69,420", () => currency.value > 69420);
+    achievement3 = theory.createAchievement(2, "Im Thousands", "Make n(t) => 1,000", () => currency.value > 1e3);
+    achievement4 = theory.createAchievement(3, "Nice", "Make n(t) => 69,420", () => currency.value > 69420);
 
     updateAvailability();
 }
@@ -57,10 +65,11 @@ var getPrimaryEquation = () => {
 }
 
 var getSecondaryEquation = () => theory.latexSymbol + "=\\max\\rho";
-var getPublicationMultiplier = (tau) => tau.pow(0.164) / BigNumber.THREE;
-var getPublicationMultiplierFormula = (symbol) => "\\frac{{" + symbol + "}^{0.164}}{3}";
+var getPublicationMultiplier = (tau) => tau.pow(0.097) / BigNumber.from(36).sqrt();
+var getPublicationMultiplierFormula = (symbol) => "\\frac{{" + symbol + "}^{0.096}}{\\sqrt{36}}";
 var getTau = () => currency.value;
 
-var getA1 = (level) => BigNumber.from(level)
+var getA1 = (level) => BigNumber.from(level) * getA2(a2.level)
+var getA2 = (level) => BigNumber.from(level + 1)
 
 init();
