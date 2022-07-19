@@ -35,6 +35,14 @@ var init = () => {
         a2.getInfo = (amount) => Utils.getMathTo(getDesc(a2.level), getDesc(a2.level + amount));
     }
 
+    // a3
+    {
+        let getDesc = (level) => "A_3=" + getA3(level).toString(0);
+        a3 = theory.createUpgrade(1, currency, new ExponentialCost(1e9, Math.log2(2.5)));
+        a3.getDescription = (_) => Utils.getMath(getDesc(a3.level));
+        a3.getInfo = (amount) => Utils.getMathTo(getDesc(a3.level), getDesc(a3.level + amount));
+    }
+
     /////////////////
     //// Achievements
     achievement1 = theory.createAchievement(0, "Im After Played!", "Reach 1 A1 Level.", () => a1.level > 0);
@@ -43,12 +51,14 @@ var init = () => {
     achievement4 = theory.createAchievement(3, "Nice", "Make n(t) => 69,420", () => currency.value > 69420);
     achievement5 = theory.createAchievement(4, "A2 Mulit?", "Reach 1 A2 Level.", () => a2.level > 0);
     achievement6 = theory.createAchievement(5, "Im Millions", "Make n(t) => 1,000,000", () => currency.value > 1e6);
+    achievement7 = theory.createAchievement(6, "Defalut This!", "Reach 10 A2 Level.", () => a2.level > 9);
+    achievement8 = theory.createAchievement(7, "Im Billions", "Make n(t) => 1e9 Reward: Unlock new Upgrades.", () => currency.value > 1e9);
 
     updateAvailability();
 }
 
 var updateAvailability = () => {
-    //COOL
+    a3.isAvailable = currency.value > 1e9;
 }
 
 var tick = (elapsedTime, multiplier) => {
@@ -59,7 +69,7 @@ var tick = (elapsedTime, multiplier) => {
 }
 
 var getPrimaryEquation = () => {
-    let result = "\\dot{n} = A_1\\sqrt{A_3}";
+    let result = "\\dot{n} = A_1";
 
     result += " \\times t"
 
@@ -72,6 +82,7 @@ var getPublicationMultiplierFormula = (symbol) => "\\frac{{" + symbol + "}^{0.09
 var getTau = () => currency.value;
 
 var getA1 = (level) => BigNumber.from(level) * getA2(a2.level)
-var getA2 = (level) => BigNumber.from(level + 1)
+var getA2 = (level) => BigNumber.from(level + 1) * getA2(a2.level)
+var getA3 = (level) => BigNumber.from(level + 1)
 
 init();
