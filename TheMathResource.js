@@ -82,7 +82,7 @@ var getPublicationMultiplierFormula = (symbol) => "\\frac{{" + symbol + "}^{0.09
 var getTau = () => currency.value;
 
 var getA1 = (level) => BigNumber.from(level) * getA2(a2.level)
-var getA2 = (level) => BigNumber.from(level + 1) * getA2(a2.level)
+var getA2 = (level) => BigNumber.from(level + 1) * getA3(a3.level)
 var getA3 = (level) => BigNumber.from(level + 1)
 
 init();
