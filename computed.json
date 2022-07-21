@@ -1,0 +1,19 @@
+{
+    "displays":10,
+    "tvars":2,
+    "letters":["a", "b"],
+    "lettersub":["a1", "a2", "a3", "b1", "b2"],
+    "vueAvaiable":false,
+    "jornkeys":{
+        "display":"Math",
+        "resource":true,
+        "markdowns":{
+            "name":["README.md", "CHANGELOG.md", "TODO.md"],
+            "filesCount":3,
+            "todo":{
+                "resource":true
+            }
+        },
+        "playerFile":"TheMathResource.js"
+    }
+}
