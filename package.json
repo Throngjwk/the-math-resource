@@ -1,0 +1,17 @@
+{
+    "name": "The Math Resource",
+    "description": "An Feature Here.",
+    "version": "1a",
+    "preview": false,
+    "markdown": "standard",
+    "categories": [
+        "Formatters",
+        "Azure",
+        "Notebooks",
+        "Linters"
+    ],
+    "author": {
+        "email": "throngjwkalways@gmail.com",
+        "name": "Thronhjwk"
+    }
+}
