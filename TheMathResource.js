@@ -72,8 +72,11 @@ var init = () => {
     achievement9 = theory.createAchievement(8, "A3 Mulit?", "Reach 1 A3 Level.", () => a3.level > 0);
     achievement10 = theory.createAchievement(9, "Last of Kind long", "Reach 4 A3 Level. Reward: Unlock New Letter.", () => a3.level > 3);
     achievement11 = theory.createAchievement(10, "B1 Power await", "Reach 1 B1 Level.", () => b1.level > 0);
-    achievement12 = theory.createAchievement(11, "Dialogue Squared", "Make n(t) => 1e20", () => currency.value > 1e9);
+    achievement12 = theory.createAchievement(11, "Dialogue Squared", "Make n(t) => 1e20", () => currency.value > 1e20);
     achievement13 = theory.createAchievement(12, "5 B1 (QoL I & Unlock II)", "Reach 5 B1 Level. Reward:t Exponent by 0.5 and Unlock new B2.", () => b1.level > 4);
+    achievement14 = theory.createAchievement(13, "Dialogue Cubed", "Make n(t) => 1e30", () => currency.value > 1e30);
+    achievement15 = theory.createAchievement(14, "Im Decillions", "Make n(t) => 1e33", () => currency.value > 1e33);
+    achievement16 = theory.createAchievement(15, "Whoah is That Lotta Damage!", "Reach 7 B1 Level.", () => b1.level > 6);
 
     updateAvailability();
 }
