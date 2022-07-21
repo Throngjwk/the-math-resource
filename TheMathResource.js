@@ -8,7 +8,7 @@ var id = "while (sky == liver);";
 var name = "The Math Resource";
 var description = "AN FEATURE HERE.";
 var authors = "Throngjwk";
-var version = 1;
+var version = "1a";
 
 var currency;
 
