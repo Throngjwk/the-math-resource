@@ -81,6 +81,10 @@ var init = () => {
     achievement16 = theory.createAchievement(15, "Whoah is That Lotta Damage!", "Reach 7 B1 Level.", () => b1.level > 6);
     achievement17 = theory.createAchievement(16, "Dialogue Squared^2", "Make n(t) => 1e40", () => currency.value > 1e40);
     achievement18 = theory.createAchievement(17, "Eighter", "Reach 8 B1 Level. Reward:Unlock new t1 for Base Mulitipler.", () => b1.level > 7);
+    achievement19 = theory.createAchievement(18, "Two Digit B-Power", "Reach 10 B1 Level.", () => b1.level > 9);
+    achievement20 = theory.createAchievement(19, "Dialogue Fifth-Five", "Make n(t) => 1e55", () => currency.value > 1e55);
+    achievement21 = theory.createAchievement(20, "The End", "Reach 11 B1 Level.", () => b1.level > 10);
+
 
     updateAvailability();
 }
