@@ -15,6 +15,7 @@ var currency;
 var init = () => {
     currency = theory.createCurrency("n", "n");
     currency2 = theory.createCurrency("t", "t");
+    let t1 = BigNumber.ONE
 
     ///////////////////
     // Regular Upgrades
@@ -77,6 +78,8 @@ var init = () => {
     achievement14 = theory.createAchievement(13, "Dialogue Cubed", "Make n(t) => 1e30", () => currency.value > 1e30);
     achievement15 = theory.createAchievement(14, "Im Decillions", "Make n(t) => 1e33", () => currency.value > 1e33);
     achievement16 = theory.createAchievement(15, "Whoah is That Lotta Damage!", "Reach 7 B1 Level.", () => b1.level > 6);
+    achievement17 = theory.createAchievement(16, "Dialogue Squared^2", "Make n(t) => 1e40", () => currency.value > 1e40);
+    achievement18 = theory.createAchievement(17, "Eighter", "Reach 8 B1 Level. Reward:Unlock new t1 for Base Mulitipler.", () => b1.level > 7);
 
     updateAvailability();
 }
@@ -90,7 +93,10 @@ var updateAvailability = () => {
 var tick = (elapsedTime, multiplier) => {
     let dt = BigNumber.from(elapsedTime * multiplier);
     let bonus = theory.publicationMultiplier;
-    currency.value += dt * currency2.value * bonus * getA1(a1.level).pow(getB2(b2.level)) * BigNumber.from(256).pow(getB1(b1.level))
+    if (b1.level > 6) {
+        t1 += dt
+    }
+    currency.value += dt * currency2.value * bonus * getA1(a1.level).pow(getB2(b2.level)) * BigNumber.from(256).pow(getB1(b1.level)) * t1
     currency2.value += dt
 }
 
