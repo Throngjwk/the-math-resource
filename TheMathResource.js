@@ -12,10 +12,11 @@ var version = 1;
 
 var currency;
 
+let t1 = BigNumber.ONE
+
 var init = () => {
     currency = theory.createCurrency("n", "n");
     currency2 = theory.createCurrency("t", "t");
-    let t1 = BigNumber.ONE
 
     ///////////////////
     // Regular Upgrades
