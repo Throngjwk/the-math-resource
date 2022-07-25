@@ -56,7 +56,7 @@ var init = () => {
     // b2
     {
         let getDesc = (level) => "B_2=" + getB1(level).toString(0);
-        b2 = theory.createUpgrade(4, currency, new FirstFreeCost(new ExponentialCost(1e24, Math.log2(123456789))));
+        b2 = theory.createUpgrade(4, currency, new FirstFreeCost(new ExponentialCost(1e24, Math.log2(3e10))));
         b2.getDescription = (_) => Utils.getMath(getDesc(b2.level));
         b2.getInfo = (amount) => Utils.getMathTo(getDesc(b2.level), getDesc(b2.level + amount));
     }
@@ -67,6 +67,22 @@ var init = () => {
         c1 = theory.createUpgrade(5, currency, new ExponentialCost(1e58, Math.log2(1e9)));
         c1.getDescription = (_) => Utils.getMath(getDesc(c1.level));
         c1.getInfo = (amount) => Utils.getMathTo(getDesc(c1.level), getDesc(c1.level + amount));
+    }
+
+    // c2
+    {
+        let getDesc = (level) => "C_2=" + getC2(level).toString(0);
+        c2 = theory.createUpgrade(6, currency, new ExponentialCost(1e99, Math.log2(4)));
+        c2.getDescription = (_) => Utils.getMath(getDesc(c2.level));
+        c2.getInfo = (amount) => Utils.getMathTo(getDesc(c2.level), getDesc(c2.level + amount));
+    }
+
+    // c3
+    {
+        let getDesc = (level) => "C_3=" + getC3(level).toString(0);
+        c3 = theory.createUpgrade(7, currency, new ExponentialCost(3e104, Math.log2(1e10)));
+        c3.getDescription = (_) => Utils.getMath(getDesc(c3.level));
+        c3.getInfo = (amount) => Utils.getMathTo(getDesc(c3.level), getDesc(c3.level + amount));
     }
 
     /////////////////
@@ -98,7 +114,10 @@ var init = () => {
     achievement25 = theory.createAchievement(24, "Lucky 7", "Make n(t) => 1e77", () => currency.value > 1e77);
     achievement26 = theory.createAchievement(25, "25% Absolute", "Make n(t) => 1e80", () => currency.value > 1e80);
     achievement27 = theory.createAchievement(26, "Whoah what at Lotta Damage!", "Reach 300 A1 Level.", () => a1.level > 299);
-    achievement28 = theory.createAchievement(27, "I Strong Mulitipler?", "Reach 5 C1 Level. Reward:Unlock new Upgrades.", () => c1.level > 0);
+    achievement28 = theory.createAchievement(27, "I Strong Mulitipler?", "Reach 5 C1 Level. Reward:Unlock new Upgrades.", () => c1.level > 4);
+    achievement29 = theory.createAchievement(28, "C2 Mulit?", "Reach 1 C2 Level.", () => c2.level > 0);
+    achievement30 = theory.createAchievement(29, "If we Googology We now...", "Make n(t) => 1e100", () => currency.value > 1e100);
+    achievement31 = theory.createAchievement(30, "B2 Expolision", "Make n(t) => 1e105 Reward:Unlock new upgrades.", () => currency.value > 1e105);
 
 
     updateAvailability();
@@ -109,6 +128,7 @@ var updateAvailability = () => {
     b1.isAvailable = a3.level > 3
     b2.isAvailable = b1.level > 4
     c1.isAvailable = b1.level > 10
+    c2.isAvailable = c1.level > 4
 }
 
 var tick = (elapsedTime, multiplier) => {
@@ -117,7 +137,7 @@ var tick = (elapsedTime, multiplier) => {
     if (b1.level > 6) {
         t1 += dt
     }
-    currency.value += dt * currency2.value * bonus * getA1(a1.level).pow(getB2(b2.level)) * BigNumber.from(256).pow(getB1(b1.level)) * BigNumber.from(6).pow(getC1(c1.level)) * t1
+    currency.value += dt * currency2.value * bonus * getA1(a1.level).pow(getB2(b2.level)) * BigNumber.from(256 + (c3.level * 10)).pow(getB1(b1.level)) * BigNumber.from(6).pow(getC1(c1.level)) * t1
     currency2.value += dt
 }
 
@@ -130,7 +150,7 @@ var getPrimaryEquation = () => {
 
     if (b1.level > 3) result += "^{1.5}"
 
-    if (a3.level > 3) result += " \\times 256^{B_1}"
+    if (a3.level > 3) result += " \\times (256 + C_3)^{B_1}"
 
     if (b1.level > 10) result += " \\times 6^{C_1}"
 
@@ -144,9 +164,11 @@ var getTau = () => currency.value;
 
 var getA1 = (level) => BigNumber.from(level) * getA2(a2.level)
 var getA2 = (level) => BigNumber.from(level + 1) * getA3(a3.level)
-var getA3 = (level) => BigNumber.from(level + 1)
+var getA3 = (level) => BigNumber.from(level + 1) * getC2(c2.level)
 var getB1 = (level) => BigNumber.from(level)
 var getB2 = (level) => BigNumber.from((level * 0.5) + 1)
 var getC1 = (level) => BigNumber.from(level)
+var getC2 = (level) => BigNumber.from(level + 1)
+var getC3 = (level) => BigNumber.from(level * 10)
 
 init();
