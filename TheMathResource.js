@@ -61,6 +61,14 @@ var init = () => {
         b2.getInfo = (amount) => Utils.getMathTo(getDesc(b2.level), getDesc(b2.level + amount));
     }
 
+    // c1
+    {
+        let getDesc = (level) => "C_1=" + getC1(level).toString(0);
+        c1 = theory.createUpgrade(5, currency, new FirstFreeCost(new ExponentialCost(1e58, Math.log2(1e9))));
+        c1.getDescription = (_) => Utils.getMath(getDesc(c1.level));
+        c1.getInfo = (amount) => Utils.getMathTo(getDesc(c1.level), getDesc(c1.level + amount));
+    }
+
     /////////////////
     //// Achievements
     achievement1 = theory.createAchievement(0, "Im After Played!", "Reach 1 A1 Level.", () => a1.level > 0);
@@ -83,7 +91,9 @@ var init = () => {
     achievement18 = theory.createAchievement(17, "Eighter", "Reach 8 B1 Level. Reward:Unlock new t1 for Base Mulitipler.", () => b1.level > 7);
     achievement19 = theory.createAchievement(18, "Two Digit B-Power", "Reach 10 B1 Level.", () => b1.level > 9);
     achievement20 = theory.createAchievement(19, "Dialogue Fifth-Five", "Make n(t) => 1e55", () => currency.value > 1e55);
-    achievement21 = theory.createAchievement(20, "The End", "Reach 11 B1 Level.", () => b1.level > 10);
+    achievement21 = theory.createAchievement(20, "The Double Ones B1.", "Reach 11 B1 Level. Reward:Unlock New Letter.", () => b1.level > 10);
+    achievement22 = theory.createAchievement(21, "I Stronger Time?", "Make n(t) => 1e58", () => currency.value > 1e58);
+    achievement20 = theory.createAchievement(19, "I Buyed 16 of Power", "Reach 1 C1 Level.", () => c1.level > 0);
 
 
     updateAvailability();
@@ -93,6 +103,7 @@ var updateAvailability = () => {
     a3.isAvailable = currency.value > 1e9;
     b1.isAvailable = a3.level > 3
     b2.isAvailable = b1.level > 4
+    c1.isAvailable = b1.level > 10
 }
 
 var tick = (elapsedTime, multiplier) => {
@@ -101,7 +112,7 @@ var tick = (elapsedTime, multiplier) => {
     if (b1.level > 6) {
         t1 += dt
     }
-    currency.value += dt * currency2.value * bonus * getA1(a1.level).pow(getB2(b2.level)) * BigNumber.from(256).pow(getB1(b1.level)) * t1
+    currency.value += dt * currency2.value * bonus * getA1(a1.level).pow(getB2(b2.level)) * BigNumber.from(256).pow(getB1(b1.level)) * BigNumber.from(16).pow(getC1(c1.level)) * t1
     currency2.value += dt
 }
 
@@ -129,5 +140,6 @@ var getA2 = (level) => BigNumber.from(level + 1) * getA3(a3.level)
 var getA3 = (level) => BigNumber.from(level + 1)
 var getB1 = (level) => BigNumber.from(level)
 var getB2 = (level) => BigNumber.from((level * 0.5) + 1)
+var getC1 = (level) => BigNumber.from(level)
 
 init();
