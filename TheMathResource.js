@@ -64,7 +64,7 @@ var init = () => {
     // c1
     {
         let getDesc = (level) => "C_1=" + getC1(level).toString(0);
-        c1 = theory.createUpgrade(5, currency, new FirstFreeCost(new ExponentialCost(1e58, Math.log2(1e9))));
+        c1 = theory.createUpgrade(5, currency, new ExponentialCost(1e58, Math.log2(1e9)));
         c1.getDescription = (_) => Utils.getMath(getDesc(c1.level));
         c1.getInfo = (amount) => Utils.getMathTo(getDesc(c1.level), getDesc(c1.level + amount));
     }
@@ -93,7 +93,7 @@ var init = () => {
     achievement20 = theory.createAchievement(19, "Dialogue Fifth-Five", "Make n(t) => 1e55", () => currency.value > 1e55);
     achievement21 = theory.createAchievement(20, "The Double Ones B1.", "Reach 11 B1 Level. Reward:Unlock New Letter.", () => b1.level > 10);
     achievement22 = theory.createAchievement(21, "I Stronger Time?", "Make n(t) => 1e58", () => currency.value > 1e58);
-    achievement20 = theory.createAchievement(19, "I Buyed 16 of Power", "Reach 1 C1 Level.", () => c1.level > 0);
+    achievement20 = theory.createAchievement(22, "I Buyed 16 of Power", "Reach 1 C1 Level.", () => c1.level > 0);
 
 
     updateAvailability();
@@ -126,6 +126,8 @@ var getPrimaryEquation = () => {
     if (b1.level > 3) result += "^{1.5}"
 
     if (a3.level > 3) result += " \\times 256^{B_1}"
+
+    if (b1.level > 10) result += " \\times 16^{C_1}"
 
     return result;
 }
