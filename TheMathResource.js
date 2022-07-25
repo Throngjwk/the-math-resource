@@ -93,7 +93,12 @@ var init = () => {
     achievement20 = theory.createAchievement(19, "Dialogue Fifth-Five", "Make n(t) => 1e55", () => currency.value > 1e55);
     achievement21 = theory.createAchievement(20, "The Double Ones B1.", "Reach 11 B1 Level. Reward:Unlock New Letter.", () => b1.level > 10);
     achievement22 = theory.createAchievement(21, "I Stronger Time?", "Make n(t) => 1e58", () => currency.value > 1e58);
-    achievement20 = theory.createAchievement(22, "I Buyed 16 of Power", "Reach 1 C1 Level.", () => c1.level > 0);
+    achievement23 = theory.createAchievement(22, "I Buyed 6 of Power", "Reach 1 C1 Level.", () => c1.level > 0);
+    achievement24 = theory.createAchievement(23, "20% Absolute", "Make n(t) => 1e75", () => currency.value > 1e75);
+    achievement25 = theory.createAchievement(24, "Lucky 7", "Make n(t) => 1e77", () => currency.value > 1e77);
+    achievement26 = theory.createAchievement(25, "25% Absolute", "Make n(t) => 1e80", () => currency.value > 1e80);
+    achievement27 = theory.createAchievement(26, "Whoah what at Lotta Damage!", "Reach 300 A1 Level.", () => a1.level > 299);
+    achievement28 = theory.createAchievement(27, "I Strong Mulitipler?", "Reach 5 C1 Level. Reward:Unlock new Upgrades.", () => c1.level > 0);
 
 
     updateAvailability();
@@ -112,7 +117,7 @@ var tick = (elapsedTime, multiplier) => {
     if (b1.level > 6) {
         t1 += dt
     }
-    currency.value += dt * currency2.value * bonus * getA1(a1.level).pow(getB2(b2.level)) * BigNumber.from(256).pow(getB1(b1.level)) * BigNumber.from(16).pow(getC1(c1.level)) * t1
+    currency.value += dt * currency2.value * bonus * getA1(a1.level).pow(getB2(b2.level)) * BigNumber.from(256).pow(getB1(b1.level)) * BigNumber.from(6).pow(getC1(c1.level)) * t1
     currency2.value += dt
 }
 
@@ -127,7 +132,7 @@ var getPrimaryEquation = () => {
 
     if (a3.level > 3) result += " \\times 256^{B_1}"
 
-    if (b1.level > 10) result += " \\times 16^{C_1}"
+    if (b1.level > 10) result += " \\times 6^{C_1}"
 
     return result;
 }
